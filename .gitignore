@@ -30,3 +30,8 @@ _ReSharper*/
 .vs/
 #Nuget packages folder
 packages/
+/Yahtzee/.idea/.idea.Yahtzee/.idea/.gitignore
+/Yahtzee/.idea/.idea.Yahtzee/.idea/encodings.xml
+/Yahtzee/.idea/.idea.Yahtzee/.idea/indexLayout.xml
+/Yahtzee/.idea/.idea.Yahtzee/.idea/riderModule.iml
+/Yahtzee/.idea/.idea.Yahtzee/.idea/vcs.xml
