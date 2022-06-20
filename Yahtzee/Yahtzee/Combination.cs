@@ -1,4 +1,4 @@
-﻿namespace Tests
+﻿namespace Yahtzee
 {
     public enum Combination
     {

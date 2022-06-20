@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-
+using FluentAssertions;
 using Xunit;
+using Yahtzee;
 
 namespace Tests
 {
@@ -14,8 +13,16 @@ namespace Tests
             Assert.Throws<ArgumentException>(() => new DiceRoll(1, 2, 3, 4, 5, 6));
         }
 
+        [Theory]
+        [InlineData(new int[] { 1, 2, 3, 4, 7})]
+        [InlineData(new int[] { 0, 2, 3, 4, 5})]
+        public void Should_throw_ArgumentException_when_die_value_invalid(int[] roll)
+        {
+            Assert.Throws<ArgumentException>(() => new DiceRoll(roll));
+        }
+
         [Fact]
-        public void Should()
+        public void Should_provide_dice_list()
         {
             // Arrange
             var expected = new[] { 1, 2, 3, 4, 5 };
@@ -25,25 +32,8 @@ namespace Tests
             var roll = diceRoll.GetRoll();
 
             // Assert
-            Assert.True(expected.Intersect(roll).Count() == 5);
+            roll.Should().BeEquivalentTo(expected);
         }
     }
 
-    public class DiceRoll
-    {
-        private readonly int[] _roll;
-
-        public DiceRoll(params int[] rolls)
-        {
-            if (rolls.Length != 5)
-                throw new ArgumentException();
-
-            _roll = rolls;
-        }
-
-        public IEnumerable<int> GetRoll()
-        {
-            return _roll.ToList();
-        }
-    }
 }
