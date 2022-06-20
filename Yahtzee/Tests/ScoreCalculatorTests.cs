@@ -47,7 +47,8 @@ namespace Tests
         [InlineData(Combination.ThreeOfAKind,new [] { 1, 1, 1, 4, 5 },12)]
         [InlineData(Combination.ThreeOfAKind, new[] { 1, 1, 4, 4, 5 }, 0)]
         [InlineData(Combination.ThreeOfAKind, new[] { 2, 2, 2, 4, 5 }, 15)]
-        public void Should(Combination combination, IEnumerable<int> rolls, int expectedScore)
+        [InlineData(Combination.ThreeOfAKind, new[] { 2, 2, 2, 2, 5 }, 13)]
+        public void Should_return_the_sum_of_dice_with_three_of_a_kind(Combination combination, IEnumerable<int> rolls, int expectedScore)
         {
             // Arrange
 
@@ -57,8 +58,19 @@ namespace Tests
             // Assert
             Assert.Equal(expectedScore, score);
         }
-        
-        
+
+        [Theory]
+        [InlineData(Combination.FourOfAKind, new[] { 1, 1, 1, 1, 5 }, 9)]
+        public void Should_return_the_sum_of_dice_with_four_of_a_kind(Combination combination, IEnumerable<int> rolls, int expectedScore)
+        {
+            // Arrange
+
+            // Act
+            var score = _calculator.GetScore(rolls, combination);
+
+            // Assert
+            Assert.Equal(expectedScore, score);
+        }
     }
 
 }

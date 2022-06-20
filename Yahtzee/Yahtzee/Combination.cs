@@ -9,5 +9,6 @@
         Fives = 5,
         Sixes = 6,
         ThreeOfAKind = 7,
+        FourOfAKind = 8,
     }
 }

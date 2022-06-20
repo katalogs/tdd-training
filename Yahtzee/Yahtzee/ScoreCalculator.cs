@@ -6,22 +6,24 @@ namespace Yahtzee
 {
     public class ScoreCalculator
     {
-        public int GetScore(IEnumerable<int> dice, int combination)
-        {
-            if (combination == 7)
-            {
-                return IsThreeOfAKind(dice) ? dice.Sum() : 0;
-            }
-
-            return dice.Where(x => x == combination).Sum();
-        }
-
         private static bool IsThreeOfAKind(IEnumerable<int> dice) =>
-            dice.GroupBy(x => x).Max(x => x.Count()) == 3;
+            dice.GroupBy(x => x).Max(x => x.Count()) >= 3;
+
+        private static bool IsFourOfAKind(IEnumerable<int> dice) =>
+            dice.GroupBy(x => x).Max(x => x.Count()) >= 4;
 
         public int GetScore(IEnumerable<int> rolls, Combination combination)
         {
-            return GetScore(rolls, (int)combination);
+            if (combination == Combination.FourOfAKind)
+            {
+                return IsFourOfAKind(rolls) ? rolls.Sum() : 0;
+            }
+
+            if (combination == Combination.ThreeOfAKind)
+            {
+                return IsThreeOfAKind(rolls) ? rolls.Sum() : 0;
+            }
+            return rolls.Where(x => x == (int)combination).Sum();
         }
     }
 }
