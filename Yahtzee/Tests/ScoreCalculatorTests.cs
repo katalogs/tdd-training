@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 using Yahtzee;
 
@@ -8,14 +9,12 @@ namespace Tests
     {
         private readonly ScoreCalculator _calculator = new ScoreCalculator();
 
-        [Fact]
-        public void Should_return_zero_for_combination_aces_when_no_die_has_value_one()
+        [Theory]
+        [InlineData(1, new [] {2, 3, 4, 6, 6 })]
+        public void Should_return_zero_for_simple_combination_when_no_die_has_the_combination_value(int combination, IEnumerable<int> rolls)
         {
-            // Arrange
-            var dice = new List<int> { 2, 3, 4, 6, 6 };
-
             // Act
-            var score = _calculator.GetScore(dice, 1);
+            var score = _calculator.GetScore(rolls.ToList(), combination);
 
             // Assert
             Assert.Equal(0, score);
@@ -32,6 +31,19 @@ namespace Tests
 
             // Assert
             Assert.Equal(1, score);
+        }
+
+        [Fact]
+        public void Should_return_sum_of_two_when_containing_only_one_two()
+        {
+            // Arrange
+            var dice = new List<int> { 1, 2, 4, 6, 6 };
+
+            // Act
+            var score = _calculator.GetScore(dice, 2);
+
+            // Assert
+            Assert.Equal(2, score);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Yahtzee
     {
         public int GetScore(List<int> dice, int combination)
         {
-            return dice.Count(x => x == combination);
+            return dice.Where(x => x == combination).Sum();
         }
     }
 }
