@@ -26,9 +26,8 @@ namespace Yahtzee
 
         private static bool IsSmallStraight(IEnumerable<int> dice)
         {
-            return (dice.Contains(1) && dice.Contains(2) && dice.Contains(3) && dice.Contains(4) ) 
-                || (dice.Contains(5) && dice.Contains(2) && dice.Contains(3) && dice.Contains(4))
-                || (dice.Contains(5) && dice.Contains(6) && dice.Contains(3) && dice.Contains(4));
+            var smallStraight = new[] { new[] { 1, 2, 3, 4 },new[] { 5,2,3,4 }, new[] { 3, 4, 5, 6 } };
+            return smallStraight.Any(s => s.Intersect(dice).Count() == 4);
         }
 
         public int GetScore(IEnumerable<int> rolls, Combination combination)
