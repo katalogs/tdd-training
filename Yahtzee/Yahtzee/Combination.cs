@@ -11,5 +11,6 @@
         ThreeOfAKind = 7,
         FourOfAKind = 8,
         FullHouse = 9,
+        SmallStraight = 10,
     }
 }

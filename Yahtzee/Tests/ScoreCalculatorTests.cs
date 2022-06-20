@@ -90,5 +90,23 @@ namespace Tests
             // Assert
             Assert.Equal(expectedScore, score);
         }
+
+        [Theory]
+        [InlineData(Combination.SmallStraight, new[] { 1, 2, 3 ,4 ,4 }, 30)]
+        [InlineData(Combination.SmallStraight, new[] { 1, 2, 1 ,4 ,4 }, 0)]
+        [InlineData(Combination.SmallStraight, new[] { 1, 2, 5 ,4 ,5 }, 0)]
+        [InlineData(Combination.SmallStraight, new[] { 5, 2, 3 ,4 ,5 }, 30)]
+        [InlineData(Combination.SmallStraight, new[] { 5, 6, 3 ,4 ,5 }, 30)]
+
+        public void Should_return_thirty_when_dice_represents_small_straight(Combination combination, IEnumerable<int> rolls, int expectedScore)
+        {
+            // Arrange
+
+            // Act
+            var score = _calculator.GetScore(rolls, combination);
+
+            // Assert
+            Assert.Equal(expectedScore, score);
+        }
     }
 }

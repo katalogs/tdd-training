@@ -1,7 +1,7 @@
-using System.Linq;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Tests;
-using System.Drawing;
 
 namespace Yahtzee
 {
@@ -24,10 +24,18 @@ namespace Yahtzee
             return dice.GroupBy(x => x).Max(x => x.Count()) >= count;
         }
 
+        private static bool IsSmallStraight(IEnumerable<int> dice)
+        {
+            return (dice.Contains(1) && dice.Contains(2) && dice.Contains(3) && dice.Contains(4) ) 
+                || (dice.Contains(5) && dice.Contains(2) && dice.Contains(3) && dice.Contains(4))
+                || (dice.Contains(5) && dice.Contains(6) && dice.Contains(3) && dice.Contains(4));
+        }
+
         public int GetScore(IEnumerable<int> rolls, Combination combination)
         {
             return combination switch
             {
+                Combination.SmallStraight => IsSmallStraight(rolls) ? 30 : 0,
                 Combination.FullHouse => IsFullHouse(rolls) ? 25 : 0,
                 Combination.FourOfAKind => IsFourOfAKind(rolls) ? rolls.Sum() : 0,
                 Combination.ThreeOfAKind => IsThreeOfAKind(rolls) ? rolls.Sum() : 0,
