@@ -27,16 +27,23 @@ namespace Yahtzee
             return dice.GroupBy(x => x).Max(x => x.Count()) >= count;
         }
 
+        private static bool IsYhatzee(IEnumerable<int> rolls)
+        {
+            return ContainsIdenticalDice(rolls, 5);
+        }
+
         private static bool IsSmallStraight(IEnumerable<int> dice) =>
-            SmallStraight.Any(s => s.Intersect(dice).Count() == 4) || dice.GroupBy(x => x).Count() == 1;
+            SmallStraight.Any(s => s.Intersect(dice).Count() == 4) || IsYhatzee(dice);
         
         private static bool IsLargeStraight(IEnumerable<int> dice) =>
-            LargeStraight.Any(s => s.Intersect(dice).Count() == 5) || dice.GroupBy(x => x).Count() == 1;
+            LargeStraight.Any(s => s.Intersect(dice).Count() == 5) || IsYhatzee(dice);
 
         public int GetScore(IEnumerable<int> rolls, Combination combination)
         {
             return combination switch
             {
+                Combination.Yahtzee => IsYhatzee(rolls) ? 50 : 0,
+                Combination.Chance => rolls.Sum(),
                 Combination.SmallStraight => IsSmallStraight(rolls) ? 30 : 0,
                 Combination.LargeStraight => IsLargeStraight(rolls) ? 40 : 0,
                 Combination.FullHouse => IsFullHouse(rolls) ? 25 : 0,
@@ -46,5 +53,6 @@ namespace Yahtzee
             };
 
         }
+
     }
 }

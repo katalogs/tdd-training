@@ -139,5 +139,17 @@ namespace Tests
             // Assert 
             Assert.Equal(expectedScore, score);
         }
+
+        [Theory]
+        [InlineData(Combination.Yahtzee, new[] { 1, 1, 1, 1, 1 }, 50)]
+        [InlineData(Combination.Yahtzee, new[] { 1, 1, 1, 1, 3 }, 0)]
+        public void Should_return_50_when_five_similar_dice(Combination combination, IEnumerable<int> rolls, int expectedScore)
+        {
+            // Act
+            var score = _calculator.GetScore(rolls, combination);
+
+            // Assert
+            Assert.Equal(expectedScore, score);
+        }
     }
 }

@@ -13,6 +13,7 @@
         FullHouse = 9,
         SmallStraight = 10,
         LargeStraight = 11,
-        Chance = 12
+        Chance = 12,
+        Yahtzee = 13
     }
 }
