@@ -109,5 +109,35 @@ namespace Tests
             // Assert
             Assert.Equal(expectedScore, score);
         }
+        
+        [Theory]
+        [InlineData(Combination.LargeStraight, new[] { 1, 2, 3 ,4 ,5 }, 40)]
+        [InlineData(Combination.LargeStraight, new[] {  2, 3 ,4 ,5, 6 }, 40)]
+        [InlineData(Combination.LargeStraight, new[] {  5, 5 ,5 ,5, 5 }, 40)]
+        [InlineData(Combination.LargeStraight, new[] {  5, 5 ,5 ,5, 4 }, 0)]
+        public void Should_return_thirty_when_dice_represents_large_straight(Combination combination, IEnumerable<int> rolls, int expectedScore)
+        {
+            // Arrange
+
+            // Act
+            var score = _calculator.GetScore(rolls, combination);
+
+            // Assert
+            Assert.Equal(expectedScore, score);
+        }
+
+        [Fact]
+        public void Should_return_sum_of_dice_when_chance_combination_invoked()
+        {
+            // Arrange
+            int expectedScore = 15;
+            var rolls = new[] { 1, 2, 3, 4, 5 };
+            
+            // Act
+            var score = _calculator.GetScore(rolls, Combination.Chance);
+            
+            // Assert 
+            Assert.Equal(expectedScore, score);
+        }
     }
 }

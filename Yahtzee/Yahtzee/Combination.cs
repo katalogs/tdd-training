@@ -12,5 +12,7 @@
         FourOfAKind = 8,
         FullHouse = 9,
         SmallStraight = 10,
+        LargeStraight = 11,
+        Chance = 12
     }
 }
