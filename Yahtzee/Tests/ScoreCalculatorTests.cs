@@ -73,6 +73,22 @@ namespace Tests
             // Assert
             Assert.Equal(expectedScore, score);
         }
+
+        [Theory]
+        [InlineData(Combination.FullHouse, new[] { 1, 1, 1, 2, 2 }, 25)]
+        [InlineData(Combination.FullHouse, new[] { 1, 1, 5, 2, 2 }, 0)]
+        [InlineData(Combination.FullHouse, new[] { 1, 1, 1, 1, 3 }, 0)]
+
+        public void Should_return_twenty_five_when_dice_represents_full_house(Combination combination, IEnumerable<int> rolls, int expectedScore)
+        {
+            // Arrange
+
+            // Act
+            var score = _calculator.GetScore(rolls, combination);
+
+            // Assert
+            Assert.Equal(expectedScore, score);
+        }
     }
 
 }

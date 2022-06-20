@@ -10,5 +10,6 @@
         Sixes = 6,
         ThreeOfAKind = 7,
         FourOfAKind = 8,
+        FullHouse = 9,
     }
 }
