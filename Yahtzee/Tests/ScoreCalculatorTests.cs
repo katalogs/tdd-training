@@ -78,6 +78,7 @@ namespace Tests
         [InlineData(Combination.FullHouse, new[] { 1, 1, 1, 2, 2 }, 25)]
         [InlineData(Combination.FullHouse, new[] { 1, 1, 5, 2, 2 }, 0)]
         [InlineData(Combination.FullHouse, new[] { 1, 1, 1, 1, 3 }, 0)]
+        [InlineData(Combination.FullHouse, new[] { 1, 1, 1, 1, 1 }, 25)]
 
         public void Should_return_twenty_five_when_dice_represents_full_house(Combination combination, IEnumerable<int> rolls, int expectedScore)
         {
@@ -90,5 +91,4 @@ namespace Tests
             Assert.Equal(expectedScore, score);
         }
     }
-
 }
