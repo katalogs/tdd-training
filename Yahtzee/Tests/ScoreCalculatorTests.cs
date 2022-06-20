@@ -19,7 +19,7 @@ namespace Tests
         public void Should_return_zero_for_simple_combination_when_no_die_has_the_combination_value(Combination combination, IEnumerable<int> rolls)
         {
             // Act
-            var score = _calculator.GetScore(rolls, combination);
+            var score = _calculator.GetScore(new DiceRoll(rolls.ToArray()), combination);
 
             // Assert
             Assert.Equal(0, score);
@@ -37,7 +37,7 @@ namespace Tests
             // Arrange;
 
             // Act
-            var score = _calculator.GetScore(rolls, combination);
+            var score = _calculator.GetScore(new DiceRoll(rolls.ToArray()), combination);
 
             // Assert
             Assert.Equal(expectedScore, score);
@@ -53,7 +53,7 @@ namespace Tests
             // Arrange
 
             // Act
-            var score = _calculator.GetScore(rolls, combination);
+            var score = _calculator.GetScore(new DiceRoll(rolls.ToArray()), combination);
 
             // Assert
             Assert.Equal(expectedScore, score);
@@ -68,7 +68,7 @@ namespace Tests
             // Arrange
 
             // Act
-            var score = _calculator.GetScore(rolls, combination);
+            var score = _calculator.GetScore(new DiceRoll(rolls.ToArray()), combination);
 
             // Assert
             Assert.Equal(expectedScore, score);
@@ -85,7 +85,7 @@ namespace Tests
             // Arrange
 
             // Act
-            var score = _calculator.GetScore(rolls, combination);
+            var score = _calculator.GetScore(new DiceRoll(rolls.ToArray()), combination);
 
             // Assert
             Assert.Equal(expectedScore, score);
@@ -104,7 +104,7 @@ namespace Tests
             // Arrange
 
             // Act
-            var score = _calculator.GetScore(rolls, combination);
+            var score = _calculator.GetScore(new DiceRoll(rolls.ToArray()), combination);
 
             // Assert
             Assert.Equal(expectedScore, score);
@@ -120,7 +120,7 @@ namespace Tests
             // Arrange
 
             // Act
-            var score = _calculator.GetScore(rolls, combination);
+            var score = _calculator.GetScore(new DiceRoll(rolls.ToArray()), combination);
 
             // Assert
             Assert.Equal(expectedScore, score);
@@ -134,7 +134,7 @@ namespace Tests
             var rolls = new[] { 1, 2, 3, 4, 5 };
             
             // Act
-            var score = _calculator.GetScore(rolls, Combination.Chance);
+            var score = _calculator.GetScore(new DiceRoll(rolls.ToArray()), Combination.Chance);
             
             // Assert 
             Assert.Equal(expectedScore, score);
@@ -146,7 +146,7 @@ namespace Tests
         public void Should_return_50_when_five_similar_dice(Combination combination, IEnumerable<int> rolls, int expectedScore)
         {
             // Act
-            var score = _calculator.GetScore(rolls, combination);
+            var score = _calculator.GetScore(new DiceRoll(rolls.ToArray()), combination);
 
             // Assert
             Assert.Equal(expectedScore, score);
