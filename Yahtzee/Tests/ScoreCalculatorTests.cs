@@ -45,9 +45,10 @@ namespace Tests
 
         [Theory]
         [InlineData(7,new [] { 1, 1, 1, 4, 5 },12)]
+        [InlineData(7, new[] { 1, 1, 4, 4, 5 }, 0)]
         public void Should(int combination, IEnumerable<int> rolls, int expectedScore)
         {
-            // Arrange;
+            // Arrange
 
             // Act
             var score = _calculator.GetScore(rolls.ToList(), combination);
