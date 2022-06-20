@@ -7,6 +7,8 @@ namespace Yahtzee
 {
     public class ScoreCalculator
     {
+        private static readonly IEnumerable<IEnumerable<int>> _smallStraight = new[] { new[] { 1, 2, 3, 4 }, new[] { 5, 2, 3, 4 }, new[] { 3, 4, 5, 6 } };
+
         private static bool IsThreeOfAKind(IEnumerable<int> dice) =>
             ContainsIdenticalDice(dice, 3);
 
@@ -24,11 +26,8 @@ namespace Yahtzee
             return dice.GroupBy(x => x).Max(x => x.Count()) >= count;
         }
 
-        private static bool IsSmallStraight(IEnumerable<int> dice)
-        {
-            var smallStraight = new[] { new[] { 1, 2, 3, 4 },new[] { 5,2,3,4 }, new[] { 3, 4, 5, 6 } };
-            return smallStraight.Any(s => s.Intersect(dice).Count() == 4);
-        }
+        private static bool IsSmallStraight(IEnumerable<int> dice) =>
+            _smallStraight.Any(s => s.Intersect(dice).Count() == 4) || dice.GroupBy(x => x).Count() == 1;
 
         public int GetScore(IEnumerable<int> rolls, Combination combination)
         {

@@ -97,6 +97,7 @@ namespace Tests
         [InlineData(Combination.SmallStraight, new[] { 1, 2, 5 ,4 ,5 }, 0)]
         [InlineData(Combination.SmallStraight, new[] { 5, 2, 3 ,4 ,5 }, 30)]
         [InlineData(Combination.SmallStraight, new[] { 5, 6, 3 ,4 ,5 }, 30)]
+        [InlineData(Combination.SmallStraight, new[] { 5, 5, 5, 5, 5 }, 30)]
 
         public void Should_return_thirty_when_dice_represents_small_straight(Combination combination, IEnumerable<int> rolls, int expectedScore)
         {
