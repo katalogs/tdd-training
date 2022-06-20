@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Yahtzee
@@ -6,7 +7,7 @@ namespace Yahtzee
     {
         public int GetScore(List<int> dice, int combination)
         {
-            return 0;
+            return dice.Count(x => x == combination);
         }
     }
 }
