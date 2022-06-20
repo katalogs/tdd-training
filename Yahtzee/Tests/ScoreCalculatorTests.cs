@@ -11,6 +11,11 @@ namespace Tests
 
         [Theory]
         [InlineData(1, new [] {2, 3, 4, 6, 6 })]
+        [InlineData(2, new [] {1, 3, 4, 6, 6 })]
+        [InlineData(3, new [] {1, 1, 4, 6, 6 })]
+        [InlineData(4, new [] {1, 1, 6, 6, 6 })]
+        [InlineData(5, new [] {1, 1, 4, 6, 6 })]
+        [InlineData(6, new [] {1, 1, 4, 5, 2 })]
         public void Should_return_zero_for_simple_combination_when_no_die_has_the_combination_value(int combination, IEnumerable<int> rolls)
         {
             // Act
@@ -20,17 +25,17 @@ namespace Tests
             Assert.Equal(0, score);
         }
 
-        [Fact]
-        public void Should_return_number_of_one_when_dice_has_ones()
+        [Theory]
+        [InlineData(1,new [] { 1, 3, 4, 6, 6 },1)]
+        public void Should_return_the_sum_of_dice_of_the_combination_value_for_simple_combinations(int combination, IEnumerable<int> rolls, int expectedScore)
         {
-            // Arrange
-            var dice = new List<int> { 1, 3, 4, 6, 6 };
+            // Arrange;
 
             // Act
-            var score = _calculator.GetScore(dice, 1);
+            var score = _calculator.GetScore(rolls.ToList(), combination);
 
             // Assert
-            Assert.Equal(1, score);
+            Assert.Equal(expectedScore, score);
         }
 
         [Fact]
