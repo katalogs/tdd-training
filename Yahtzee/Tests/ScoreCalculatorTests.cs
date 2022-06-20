@@ -61,6 +61,8 @@ namespace Tests
 
         [Theory]
         [InlineData(Combination.FourOfAKind, new[] { 1, 1, 1, 1, 5 }, 9)]
+        [InlineData(Combination.FourOfAKind, new[] { 1, 1, 2, 1, 5 }, 0)]
+        [InlineData(Combination.FourOfAKind, new[] { 1, 1, 1, 1, 1 }, 5)]
         public void Should_return_the_sum_of_dice_with_four_of_a_kind(Combination combination, IEnumerable<int> rolls, int expectedScore)
         {
             // Arrange

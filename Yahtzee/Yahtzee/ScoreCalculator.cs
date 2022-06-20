@@ -7,10 +7,15 @@ namespace Yahtzee
     public class ScoreCalculator
     {
         private static bool IsThreeOfAKind(IEnumerable<int> dice) =>
-            dice.GroupBy(x => x).Max(x => x.Count()) >= 3;
+            ContainesIdenticalDice(dice, 3);
 
         private static bool IsFourOfAKind(IEnumerable<int> dice) =>
-            dice.GroupBy(x => x).Max(x => x.Count()) >= 4;
+            ContainesIdenticalDice(dice, 4);
+
+        private static bool ContainesIdenticalDice(IEnumerable<int> dice, int count)
+        {
+            return dice.GroupBy(x => x).Max(x => x.Count()) >= count;
+        }
 
         public int GetScore(IEnumerable<int> rolls, Combination combination)
         {
