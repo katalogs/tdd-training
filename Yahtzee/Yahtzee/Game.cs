@@ -15,7 +15,7 @@ namespace Yahtzee
 
         private readonly Dictionary<Combination, int> _scores = new();
         private bool _yahtzeeAlreadyScored = false;
-        private int yahtzeeCounter = 0;
+        private int _yahtzeeCounter = 0;
 
         private int _upperSectionScore = 0;
         private readonly ScoreCalculator _scoreCalculator;
@@ -32,14 +32,20 @@ namespace Yahtzee
 
         public void Score(Combination combination, DiceRoll diceRoll)
         {
+            if (IsFilled(combination))
+            {
+                throw new InvalidOperationException();
+            }
+            
             if (_yahtzeeAlreadyScored && diceRoll.IsYahtzee())
             {
-                Enum.TryParse<Combination>(diceRoll.GetRoll().First().ToString(),out Combination target);
+                Enum.TryParse<Combination>(diceRoll.GetRoll().First().ToString(),out var target);
                 if (diceRoll.GetRoll().First() != (int)combination && !IsFilled(target))
                     throw new InvalidOperationException();
-                yahtzeeCounter += 1;
+                _yahtzeeCounter += 1;
             }
-            if (combination == Combination.Yahtzee && diceRoll.IsYahtzee()) _yahtzeeAlreadyScored=true;
+            _yahtzeeAlreadyScored = _yahtzeeAlreadyScored || combination == Combination.Yahtzee && diceRoll.IsYahtzee();
+            
             if (IsUpperSectionCombination(combination))
             {
                 _upperSectionScore += _scoreCalculator.GetScore(diceRoll, combination);
@@ -73,7 +79,7 @@ namespace Yahtzee
 
         public int GetYahtzeeBonus()
         {
-            return yahtzeeCounter * 100;
+            return _yahtzeeCounter * 100;
         }
     }
 }

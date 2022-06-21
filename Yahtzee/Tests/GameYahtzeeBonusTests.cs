@@ -118,7 +118,7 @@ namespace Tests
         }
 
         [Fact]
-        public void Should_allow_any_lower_combination_for_bonus_yhatzee_when_appropriated_upper_section_combination_is_filled()
+        public void Should_allow_any_lower_combination_for_bonus_yahtzee_when_appropriated_upper_section_combination_is_filled()
         {
             var game = new Game(new ScoreCalculator());
 

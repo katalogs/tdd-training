@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 
 using Xunit;
 
@@ -147,6 +148,17 @@ namespace Tests
 
             // Assert
             score.Should().Be(expectedScore);
+        }
+        
+        [Fact]
+        public void Should_throw_invalidOperationException_when_chosing_two_times_the_same_combination()
+        {
+            _game.Score(Combination.Aces, new DiceRoll(1, 1, 5, 1, 1)); //5
+
+            Action scoreAces = () => _game.Score(Combination.Aces, new DiceRoll(1, 1, 4, 1, 1)); //5
+
+            scoreAces.Should().ThrowExactly<InvalidOperationException>();
+
         }
     }
 }
