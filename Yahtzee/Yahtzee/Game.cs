@@ -13,6 +13,10 @@ namespace Yahtzee
             Combination.Aces, Combination.Twos, Combination.Threes,
             Combination.Fours, Combination.Fives, Combination.Sixes };
 
+        private static readonly IEnumerable<Combination> LowerCombinations = new[] {
+            Combination.ThreeOfAKind, Combination.FourOfAKind, Combination.SmallStraight,
+            Combination.LargeStraight, Combination.Chance, Combination.FullHouse, Combination.Yahtzee };
+
         private readonly Dictionary<Combination, int> _scores = new();
         private bool _yahtzeeAlreadyScored = false;
         private int _yahtzeeCounter = 0;
@@ -39,9 +43,7 @@ namespace Yahtzee
             
             if (_yahtzeeAlreadyScored && diceRoll.IsYahtzee())
             {
-                Enum.TryParse<Combination>(diceRoll.GetRoll().First().ToString(),out var target);
-                var isAllowed = diceRoll.GetRoll().First() != (int)combination && !IsFilled(target);
-                if (isAllowed)
+                if (!IsAllowedForYahtzeeBonus(combination, diceRoll))
                     throw new InvalidOperationException();
                 _yahtzeeCounter += 1;
             }
@@ -52,6 +54,20 @@ namespace Yahtzee
                 _upperSectionScore += _scoreCalculator.GetScore(diceRoll, combination);
             }
             _scores.Add(combination, _scoreCalculator.GetScore(diceRoll, combination));
+        }
+
+        private bool IsAllowedForYahtzeeBonus(Combination combination, DiceRoll diceRoll)
+        {
+            Enum.TryParse<Combination>(diceRoll.GetRoll().First().ToString(), out var target);
+            var isAllowed = diceRoll.GetRoll().First() == (int)combination || IsFilled(target);
+            var lowerIsFilled = LowerCombinations.All(combination => _scores.ContainsKey(combination));
+            if (UpperCombinations.Contains(combination) &&
+                combination != target &&
+                !lowerIsFilled)
+            {
+                isAllowed = false;
+            }
+            return isAllowed;
         }
 
         private bool IsFilled(Combination target)

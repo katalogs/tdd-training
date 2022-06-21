@@ -87,7 +87,7 @@ namespace Tests
         [InlineData(Combination.SmallStraight)]
         [InlineData(Combination.LargeStraight)]
         [InlineData(Combination.Chance)]
-        public void Should_throw_an_exception_when_try_use_bonu_yahtzee_in_inappropriated_combination(Combination combination)
+        public void Should_throw_an_exception_when_try_use_bonus_yahtzee_in_inappropriated_combination(Combination combination)
         {
             var game = new Game(new ScoreCalculator());
 
