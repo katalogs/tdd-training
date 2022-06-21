@@ -68,7 +68,7 @@ namespace Yahtzee
 
         public int GetScore()
         {
-            return 183;
+            return _scores.Values.Sum() + GetYahtzeeBonus() + GetUpperSectionBonus();
         }
 
         public int GetYahtzeeBonus()

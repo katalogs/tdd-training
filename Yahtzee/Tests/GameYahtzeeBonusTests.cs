@@ -131,5 +131,26 @@ namespace Tests
 
             score.Should().Be(expectedScore);
         }
+        
+        [Fact]
+        public void Should()
+        {
+            var game = new Game(new ScoreCalculator());
+
+            game.Score(Combination.Yahtzee, new DiceRoll(6, 6, 6, 6, 6));
+            game.Score(Combination.Aces, new DiceRoll(1, 2, 1, 2, 1));
+            game.Score(Combination.ThreeOfAKind, new DiceRoll(1, 2, 3, 4, 5));
+            game.Score(Combination.FourOfAKind, new DiceRoll(1, 2, 3, 4, 5));
+            game.Score(Combination.FullHouse, new DiceRoll(1, 1, 2, 1, 1));
+            game.Score(Combination.SmallStraight, new DiceRoll(1, 1, 2, 1, 1));
+            game.Score(Combination.LargeStraight, new DiceRoll(1, 1, 2, 1, 1));
+            game.Score(Combination.Chance, new DiceRoll(1, 1, 2, 1, 1));
+            game.Score(Combination.Twos, new DiceRoll(1, 1, 1, 1, 1));
+
+            var expectedScore = 159;
+            var score = game.GetScore();
+
+            score.Should().Be(expectedScore);
+        }
     }
 }

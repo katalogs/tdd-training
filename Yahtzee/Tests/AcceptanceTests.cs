@@ -125,7 +125,7 @@ namespace Tests
             var expectedScore = 381;
 
             // Act
-            _game.Score(Combination.Aces, new DiceRoll(1, 1, 1, 1, 1)); //5+100
+            _game.Score(Combination.Aces, new DiceRoll(1, 1, 1, 1, 1)); //5
             _game.Score(Combination.Yahtzee, new DiceRoll(6, 6, 6, 6, 6)); //50
             _game.Score(Combination.Twos, new DiceRoll(2, 2, 4, 2, 1)); //6
             _game.Score(Combination.Threes, new DiceRoll(3, 3, 3, 2, 1));//9
@@ -137,7 +137,7 @@ namespace Tests
 
             _game.Score(Combination.ThreeOfAKind, new DiceRoll(1, 1, 1, 4, 5)); //12
             _game.Score(Combination.FourOfAKind, new DiceRoll(1, 1, 1, 1, 5));  //9
-            _game.Score(Combination.FullHouse, new DiceRoll(2, 2, 2, 4, 4));    //25
+            _game.Score(Combination.FullHouse, new DiceRoll(2, 2, 2, 2, 2));    //25+100
             _game.Score(Combination.SmallStraight, new DiceRoll(1, 2, 3, 4, 6));//30
             _game.Score(Combination.LargeStraight, new DiceRoll(1, 2, 3, 4, 5));//40
             _game.Score(Combination.Chance, new DiceRoll(2, 2, 1, 2, 2));   //9
