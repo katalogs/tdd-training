@@ -51,5 +51,23 @@ namespace Tests
             score.Should().Be(expectedScore);
 
         }
+
+        [Fact]
+        public void Should_return_zero_in_the_upper_section_total_if_the_combinations_are_from_lower_section()
+        {
+            var game = new Game();
+            var expectedScore = 0;
+
+            game.Score(Combination.ThreeOfAKind, new DiceRoll(1, 1, 1, 4, 5));
+            game.Score(Combination.FourOfAKind, new DiceRoll(1, 1, 1, 1, 5));
+            game.Score(Combination.FullHouse, new DiceRoll(2, 2, 2, 4, 4));
+            game.Score(Combination.SmallStraight, new DiceRoll(1, 2, 3, 4, 6));
+            game.Score(Combination.LargeStraight, new DiceRoll(1, 2, 3, 4, 5));
+            game.Score(Combination.Yahtzee, new DiceRoll(2, 2, 2, 2, 2));
+            game.Score(Combination.Chance, new DiceRoll(2, 2, 1, 2, 2));
+            var score = game.GetUpperSectionTotal();
+
+            score.Should().Be(expectedScore);
+        }
     }
 }
