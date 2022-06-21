@@ -38,5 +38,18 @@ namespace Tests
             // Assert
             score.Should().Be(expected);
         }
+
+        [Fact]
+        public void Should_return_zero_in_the_upper_section_total_if_the_chosen_combination_was_little_straight()
+        {
+            var game = new Game();
+            var expectedScore = 0;
+            
+            game.Score(Combination.SmallStraight, new DiceRoll(1,2,3,4,5));
+            var score = game.GetUpperSectionTotal();
+
+            score.Should().Be(expectedScore);
+
+        }
     }
 }

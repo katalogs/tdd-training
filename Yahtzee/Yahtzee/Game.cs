@@ -1,4 +1,6 @@
-﻿namespace Yahtzee
+﻿using System.Collections.Generic;
+
+namespace Yahtzee
 {
     public class Game
     {
@@ -9,10 +11,10 @@
             return score;
         }
 
-        public void Score(Combination aces, DiceRoll diceRoll)
+        public void Score(Combination combination, DiceRoll diceRoll)
         {
             ScoreCalculator scoreCalculator = new ScoreCalculator();
-            score += scoreCalculator.GetScore(diceRoll, aces);
+            score += scoreCalculator.GetScore(diceRoll, combination);
         }
     }
 }
