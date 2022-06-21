@@ -87,7 +87,7 @@ namespace Tests
         [InlineData(Combination.SmallStraight)]
         [InlineData(Combination.LargeStraight)]
         [InlineData(Combination.Chance)]
-        public void Should(Combination combination)
+        public void Should_throw_an_exception_when_try_use_bonu_yahtzee_in_inappropriated_combination(Combination combination)
         {
             var game = new Game(new ScoreCalculator());
 
@@ -118,7 +118,7 @@ namespace Tests
         }
 
         [Fact]
-        public void Should2()
+        public void Should_allow_any_lower_combination_for_bonus_yhatzee_when_appropriated_upper_section_combination_is_filled()
         {
             var game = new Game(new ScoreCalculator());
 
