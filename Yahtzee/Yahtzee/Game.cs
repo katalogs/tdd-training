@@ -13,6 +13,7 @@ namespace Yahtzee
             Combination.Aces, Combination.Twos, Combination.Threes,
             Combination.Fours, Combination.Fives, Combination.Sixes };
 
+        private readonly Dictionary<Combination, int> _scores = new();
         private bool _yahtzeeAlreadyScored = false;
         private int yahtzeeCounter = 0;
 
@@ -34,7 +35,7 @@ namespace Yahtzee
             if (_yahtzeeAlreadyScored && diceRoll.IsYahtzee())
             {
                 Enum.TryParse<Combination>(diceRoll.GetRoll().First().ToString(),out Combination target);
-                if (diceRoll.GetRoll().First() != (int)combination && IsFilled(target))
+                if (diceRoll.GetRoll().First() != (int)combination && !IsFilled(target))
                     throw new InvalidOperationException();
                 yahtzeeCounter += 1;
             }
@@ -43,11 +44,12 @@ namespace Yahtzee
             {
                 _upperSectionScore += _scoreCalculator.GetScore(diceRoll, combination);
             }
+            _scores.Add(combination, _scoreCalculator.GetScore(diceRoll, combination));
         }
 
         private bool IsFilled(Combination target)
         {
-            throw new NotImplementedException();
+            return _scores.ContainsKey(target);
         }
 
         private static bool IsUpperSectionCombination(Combination combination)
