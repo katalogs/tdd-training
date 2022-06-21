@@ -56,7 +56,7 @@ namespace Tests
         public void Should_return_zero_in_the_upper_section_total_if_the_combinations_are_from_lower_section()
         {
             var game = new Game();
-            var expectedScore = 0;
+            var expectedScore = 1;
 
             game.Score(Combination.ThreeOfAKind, new DiceRoll(1, 1, 1, 4, 5));
             game.Score(Combination.FourOfAKind, new DiceRoll(1, 1, 1, 1, 5));
@@ -65,6 +65,7 @@ namespace Tests
             game.Score(Combination.LargeStraight, new DiceRoll(1, 2, 3, 4, 5));
             game.Score(Combination.Yahtzee, new DiceRoll(2, 2, 2, 2, 2));
             game.Score(Combination.Chance, new DiceRoll(2, 2, 1, 2, 2));
+            game.Score(Combination.Aces, new DiceRoll(2, 2, 1, 2, 2));
             var score = game.GetUpperSectionTotal();
 
             score.Should().Be(expectedScore);
