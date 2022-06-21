@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Yahtzee
@@ -11,7 +12,9 @@ namespace Yahtzee
         private static readonly IEnumerable<Combination> UpperCombinations = new[] { 
             Combination.Aces, Combination.Twos, Combination.Threes,
             Combination.Fours, Combination.Fives, Combination.Sixes };
-        
+
+        private bool _yahtzeeAlreadyScored = false;
+
         private int _upperSectionScore = 0;
         private readonly ScoreCalculator _scoreCalculator;
 
@@ -27,6 +30,7 @@ namespace Yahtzee
 
         public void Score(Combination combination, DiceRoll diceRoll)
         {
+            if(combination == Combination.Yahtzee) _yahtzeeAlreadyScored=true;
             if (IsUpperSectionCombination(combination))
             {
                 _upperSectionScore += _scoreCalculator.GetScore(diceRoll, combination);
@@ -45,6 +49,17 @@ namespace Yahtzee
         private bool SatisfiesUpperSectionBonus()
         {
             return _upperSectionScore >= UpperSectionBonusThreshold;
+        }
+
+        public int GetScore()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetYahtzeeBonus()
+        {
+            if(_yahtzeeAlreadyScored) return 100;
+            return 0;
         }
     }
 }

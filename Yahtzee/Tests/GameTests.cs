@@ -70,5 +70,30 @@ namespace Tests
 
             score.Should().Be(expectedScore);
         }
+
+        [Fact]
+        public void Should_return_100_when_one_bonus_occured()
+        {
+            var game = new Game(new ScoreCalculator());
+            var expectedScore = 100;
+
+            game.Score(Combination.Yahtzee, new DiceRoll(6, 6, 6, 6, 6));
+            game.Score(Combination.Aces, new DiceRoll(1, 1, 1, 1, 1));
+            var score = game.GetYahtzeeBonus();
+
+            score.Should().Be(expectedScore);
+        }
+
+        [Fact]
+        public void Should_return_0_when_0_yahtzee_occured()
+        {
+            var game = new Game(new ScoreCalculator());
+            var expectedScore = 0;
+
+            game.Score(Combination.Aces, new DiceRoll(1, 1, 1, 1, 1));
+            var score = game.GetYahtzeeBonus();
+
+            score.Should().Be(expectedScore);
+        }
     }
 }
