@@ -14,6 +14,7 @@ namespace Yahtzee
             Combination.Fours, Combination.Fives, Combination.Sixes };
 
         private bool _yahtzeeAlreadyScored = false;
+        private int yahtzeeCounter = 0;
 
         private int _upperSectionScore = 0;
         private readonly ScoreCalculator _scoreCalculator;
@@ -30,7 +31,8 @@ namespace Yahtzee
 
         public void Score(Combination combination, DiceRoll diceRoll)
         {
-            if(combination == Combination.Yahtzee) _yahtzeeAlreadyScored=true;
+            if (_yahtzeeAlreadyScored && diceRoll.IsYahtzee()) yahtzeeCounter += 1;
+            if (combination == Combination.Yahtzee && diceRoll.IsYahtzee()) _yahtzeeAlreadyScored=true;
             if (IsUpperSectionCombination(combination))
             {
                 _upperSectionScore += _scoreCalculator.GetScore(diceRoll, combination);
@@ -58,8 +60,7 @@ namespace Yahtzee
 
         public int GetYahtzeeBonus()
         {
-            if(_yahtzeeAlreadyScored) return 100;
-            return 0;
+            return yahtzeeCounter * 100;
         }
     }
 }
