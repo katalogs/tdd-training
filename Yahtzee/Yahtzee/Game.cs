@@ -5,11 +5,15 @@ namespace Yahtzee
 {
     public class Game
     {
+        private const int UpperSectionBonusThreshold = 63;
+        private const int UpperSectionBonus = 35;
+        
         private static readonly IEnumerable<Combination> UpperCombinations = new[] { 
             Combination.Aces, Combination.Twos, Combination.Threes,
             Combination.Fours, Combination.Fives, Combination.Sixes };
-        private int score = 0;
-        private ScoreCalculator _scoreCalculator;
+        
+        private int _upperSectionScore = 0;
+        private readonly ScoreCalculator _scoreCalculator;
 
         public Game(ScoreCalculator scoreCalculator)
         {
@@ -18,14 +22,14 @@ namespace Yahtzee
 
         public int GetUpperSectionTotal()
         {
-            return score;
+            return _upperSectionScore;
         }
 
         public void Score(Combination combination, DiceRoll diceRoll)
         {
             if (IsUpperSectionCombination(combination))
             {
-                score += _scoreCalculator.GetScore(diceRoll, combination);
+                _upperSectionScore += _scoreCalculator.GetScore(diceRoll, combination);
             }
         }
 
@@ -36,7 +40,11 @@ namespace Yahtzee
 
         public int GetUpperSectionBonus()
         {
-            throw new System.NotImplementedException();
+            return SatisfiesUpperSectionBonus() ? UpperSectionBonus : 0;
+        }
+        private bool SatisfiesUpperSectionBonus()
+        {
+            return _upperSectionScore >= UpperSectionBonusThreshold;
         }
     }
 }
