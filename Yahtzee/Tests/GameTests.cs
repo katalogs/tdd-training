@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 
 using Xunit;
 
@@ -110,7 +111,7 @@ namespace Tests
         }
 
         [Fact]
-        public void Should()
+        public void Should_return_sum_yahtzee_bonus()
         {
             var game = new Game(new ScoreCalculator());
             var expectedScore = 200;
@@ -121,6 +122,35 @@ namespace Tests
             var score = game.GetYahtzeeBonus();
 
             score.Should().Be(expectedScore);
+        }
+        
+        [Fact]
+        public void Should_not_add_yahtzee_bonus_before_yahtzee_combination_is_filled()
+        {
+            var game = new Game(new ScoreCalculator());
+            var expectedScore = 100;
+
+            game.Score(Combination.Aces, new DiceRoll(1, 1, 1, 1, 1));
+            game.Score(Combination.Yahtzee, new DiceRoll(6, 6, 6, 6, 6));
+            game.Score(Combination.Threes, new DiceRoll(3, 3, 3, 3, 3));
+            var score = game.GetYahtzeeBonus();
+
+            score.Should().Be(expectedScore);
+        }
+        
+        [Theory]
+        [InlineData(Combination.Twos)]
+        [InlineData(Combination.Threes)]
+        [InlineData(Combination.Fours)]
+        [InlineData(Combination.Fives)]
+        [InlineData(Combination.Sixes)]
+        public void Should(Combination combination)
+        {
+            var game = new Game(new ScoreCalculator());
+
+            game.Score(Combination.Yahtzee, new DiceRoll(6, 6, 6, 6, 6));
+            Assert.Throws<InvalidOperationException>(() 
+                => game.Score(combination, new DiceRoll(1, 1, 1, 1, 1)));
         }
     }
 }

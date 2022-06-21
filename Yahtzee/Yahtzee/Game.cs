@@ -31,7 +31,12 @@ namespace Yahtzee
 
         public void Score(Combination combination, DiceRoll diceRoll)
         {
-            if (_yahtzeeAlreadyScored && diceRoll.IsYahtzee()) yahtzeeCounter += 1;
+            if (_yahtzeeAlreadyScored && diceRoll.IsYahtzee())
+            {
+                if (diceRoll.GetRoll().First() != (int)combination)
+                    throw new InvalidOperationException();
+                yahtzeeCounter += 1;
+            }
             if (combination == Combination.Yahtzee && diceRoll.IsYahtzee()) _yahtzeeAlreadyScored=true;
             if (IsUpperSectionCombination(combination))
             {
