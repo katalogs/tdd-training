@@ -12,7 +12,7 @@ namespace Tests
         public void Should_return_total_0_when_game_begins()
         {
             // Arrange
-            var game = new Game();
+            var game = new Game(new ScoreCalculator());
             var expected = 0;
 
             // Act
@@ -29,7 +29,7 @@ namespace Tests
         public void Should_return_expected_total_when_only_scores_for_combination_aces(int[] roll, int expected)
         {
             // Arrange
-            var game = new Game();
+            var game = new Game(new ScoreCalculator());
 
             // Act
             game.Score(Combination.Aces, new DiceRoll(roll));
@@ -42,7 +42,7 @@ namespace Tests
         [Fact]
         public void Should_return_zero_in_the_upper_section_total_if_the_chosen_combination_was_little_straight()
         {
-            var game = new Game();
+            var game = new Game(new ScoreCalculator());
             var expectedScore = 0;
             
             game.Score(Combination.SmallStraight, new DiceRoll(1,2,3,4,5));
@@ -55,7 +55,7 @@ namespace Tests
         [Fact]
         public void Should_return_zero_in_the_upper_section_total_if_the_combinations_are_from_lower_section()
         {
-            var game = new Game();
+            var game = new Game(new ScoreCalculator());
             var expectedScore = 1;
 
             game.Score(Combination.ThreeOfAKind, new DiceRoll(1, 1, 1, 4, 5));
