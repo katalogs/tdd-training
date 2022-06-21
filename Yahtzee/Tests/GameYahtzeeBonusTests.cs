@@ -133,7 +133,7 @@ namespace Tests
         }
         
         [Fact]
-        public void Should()
+        public void Should_allow_any_upper_combination_for_bonus_yahtzee_when_appropiated_upper_and_lower_section_combination_are_filled()
         {
             var game = new Game(new ScoreCalculator());
 
@@ -151,6 +151,24 @@ namespace Tests
             var score = game.GetScore();
 
             score.Should().Be(expectedScore);
+        }
+
+        [Fact]
+        public void Should_not_allow_any_upper_combination_for_bonus_yahtzee_when_appropiated_upper_section_is_filled_but_all_lower_section_combination_are_not_filled()
+        {
+            var game = new Game(new ScoreCalculator());
+
+            game.Score(Combination.Yahtzee, new DiceRoll(6, 6, 6, 6, 6));
+            game.Score(Combination.Aces, new DiceRoll(1, 2, 1, 2, 1));
+            game.Score(Combination.ThreeOfAKind, new DiceRoll(1, 2, 3, 4, 5));
+            game.Score(Combination.FourOfAKind, new DiceRoll(1, 2, 3, 4, 5));
+            game.Score(Combination.FullHouse, new DiceRoll(1, 1, 2, 1, 1));
+            game.Score(Combination.SmallStraight, new DiceRoll(1, 1, 2, 1, 1));
+            game.Score(Combination.LargeStraight, new DiceRoll(1, 1, 2, 1, 1));
+            Action fail = () => game.Score(Combination.Twos, new DiceRoll(1, 1, 1, 1, 1));
+;
+
+            fail.Should().Throw<InvalidOperationException>();
         }
     }
 }

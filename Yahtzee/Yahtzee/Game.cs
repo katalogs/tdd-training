@@ -40,7 +40,8 @@ namespace Yahtzee
             if (_yahtzeeAlreadyScored && diceRoll.IsYahtzee())
             {
                 Enum.TryParse<Combination>(diceRoll.GetRoll().First().ToString(),out var target);
-                if (diceRoll.GetRoll().First() != (int)combination && !IsFilled(target))
+                var isAllowed = diceRoll.GetRoll().First() != (int)combination && !IsFilled(target);
+                if (isAllowed)
                     throw new InvalidOperationException();
                 _yahtzeeCounter += 1;
             }
