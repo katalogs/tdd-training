@@ -7,6 +7,8 @@ namespace Tests
     {
         private List<int> _dices;
 
+
+
         //5 dés + combinaison = total
         [Fact]
         public void Aces_with_five_1_should_return_5()
@@ -88,5 +90,34 @@ namespace Tests
             // Assert
             Assert.Equal(10, actual);
         }
+
+        [Fact]
+        public void Twos_with_zeros_2_should_return_0()
+        {
+            // Arrange
+            var calculator = new Calculator();
+            _dices = new List<int> { 3, 4, 5, 3, 4 };
+
+            // Act
+            var actual = calculator.GetTotal(2, _dices);
+
+            // Assert
+            Assert.Equal(0, actual);
+        }
+
+        [Fact]
+        public void Twos_with_three_2_should_return_6()
+        {
+            // Arrange
+            var calculator = new Calculator();
+            _dices = new List<int> { 2, 2, 2, 3, 4 };
+
+            // Act
+            var actual = calculator.GetTotal(2, _dices);
+
+            // Assert
+            Assert.Equal(6, actual);
+        }
+
     }
 }
