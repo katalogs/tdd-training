@@ -1,9 +1,13 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
+using Xunit;
 
 namespace Tests
 {
     public class CalculatorTest
     {
+
+        private List<int> _dices;
+
         //5 dés + combinaison = total
         [Fact]
         public void Aces_with_five_1_should_return_5()
@@ -11,8 +15,10 @@ namespace Tests
             // Arrange
             var calculator = new Calculator();
 
+            _dices = new List<int> { 1, 1, 1, 1, 1 };
+
             // Act
-            var actual = calculator.GetTotal(1, new[] { 1, 1, 1, 1, 1 });
+            var actual = calculator.GetTotal(1, _dices);
 
             // Assert
             Assert.Equal(5, actual);
@@ -24,11 +30,28 @@ namespace Tests
             // Arrange
             var calculator = new Calculator();
 
+           _dices = new List<int> { 1, 1, 1, 2, 5 };
+
             // Act
-            var actual = calculator.GetTotal(1, new[] { 1, 1, 1, 2, 5 });
+            var actual = calculator.GetTotal(1, _dices);
 
             // Assert
             Assert.Equal(3, actual);
+        }
+
+        [Fact]
+        public void Aces_with_zero_1_should_return_zero()
+        {
+            // Arrange
+            var calculator = new Calculator();
+
+            _dices = new List<int> { 4, 3, 2, 2, 5 };
+
+            // Act
+            var actual = calculator.GetTotal(1, _dices);
+
+            // Assert
+            Assert.Equal(0, actual);
         }
     }
 }

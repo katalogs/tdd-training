@@ -1,13 +1,13 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests
 {
     public class Calculator
     {
-        public int GetTotal(int combination, int[] dices)
+        public int GetTotal(int combination, List<int> dices)
         {
-            var list = dices.ToList();
-            return list.Count(x => x == 1);
+            return dices.Count(x => x == 1);
         }
     }
 }
