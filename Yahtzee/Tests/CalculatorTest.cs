@@ -13,7 +13,6 @@ namespace Tests
         {
             // Arrange
             var calculator = new Calculator();
-
             _dices = new List<int> { 1, 1, 1, 1, 1 };
 
             // Act
@@ -28,7 +27,6 @@ namespace Tests
         {
             // Arrange
             var calculator = new Calculator();
-
             _dices = new List<int> { 1, 1, 1, 2, 5 };
 
             // Act
@@ -43,7 +41,6 @@ namespace Tests
         {
             // Arrange
             var calculator = new Calculator();
-
             _dices = new List<int> { 4, 3, 2, 2, 5 };
 
             // Act
@@ -58,7 +55,6 @@ namespace Tests
         {
             // Arrange
             var calculator = new Calculator();
-
             _dices = new List<int> { 4, 3, 2, 2, 5, 3, 5 };
 
             // Act
@@ -73,11 +69,24 @@ namespace Tests
         {
             // Arrange
             var calculator = new Calculator();
-
             _dices = new List<int> { 4, 3, 2 };
 
             // Assert
             Assert.Throws<HasNotFiveDicesException>(() => calculator.GetTotal(1, _dices));
+        }
+
+        [Fact]
+        public void Twos_with_five_2_should_return_10()
+        {
+            // Arrange
+            var calculator = new Calculator();
+            _dices = new List<int> { 2, 2, 2, 2, 2 };
+
+            // Act
+            var actual = calculator.GetTotal(2, _dices);
+
+            // Assert
+            Assert.Equal(10, actual);
         }
     }
 }
