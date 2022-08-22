@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Tests
@@ -52,6 +53,21 @@ namespace Tests
 
             // Assert
             Assert.Equal(0, actual);
+        }
+
+        [Fact]
+        public void Calculator_with_more_than_5_dices_should_throw_exception()
+        {
+            // Arrange
+            var calculator = new Calculator();
+
+            _dices = new List<int> { 4, 3, 2, 2, 5, 3, 5 };
+
+            // Act
+            var actual = Assert.Throws<MoreThanFiveDicesException>(() => calculator.GetTotal(1, _dices));
+
+            // Assert
+            Assert.IsType<MoreThanFiveDicesException>(actual);
         }
     }
 }

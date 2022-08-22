@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Tests
@@ -7,6 +8,9 @@ namespace Tests
     {
         public int GetTotal(int combination, List<int> dices)
         {
+            if (dices.Count > 5)
+                throw new MoreThanFiveDicesException();
+
             return dices.Count(x => x == 1);
         }
     }
