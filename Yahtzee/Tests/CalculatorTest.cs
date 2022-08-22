@@ -1,32 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Xunit;
 
 namespace Tests
 {
-    internal class CalculatorTest
+    public class CalculatorTest
     {
         //5 dés + combinaison = total
-
-        public void calculator_should_return_total()
+        [Fact]
+        public void Aces_with_five_1_should_return_5()
         {
             // But test : Renvoie de la bonne valeur du cas 5 dés de valeur 1
 
             // Arrange
-            var calcultor = new Calculator();
+            var calculator = new Calculator();
 
             // Act
-            int combinaison = 1;
+            int combination = 1;
 
-            int actual = calcultor.getTotal(combinaison, new int[] { 1, 1, 1, 1, 1 });
+            int actual = calculator.GetTotal(combination, new int[] { 1, 1, 1, 1, 1 });
 
             // Assert
-            Assert.Equals(5, actual);
+            Assert.Equal(5, actual);
         }
-
-
-
     }
 }
