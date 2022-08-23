@@ -11,17 +11,32 @@ namespace Tests
 
         //5 dés + combinaison = total
         [Fact]
-        public void Aces_with_five_1_should_return_5()
+        [Theory]
+        [InlineData(new List<int>() { 1,1,1,1,1 }, 5, 1)]
+        public void Aces_with_five_1_should_return_5(List<int> dices, int expected, int combination)
+        {
+            // Arrange
+            var calculator = new Calculator(); 
+
+            // Act
+            var actual = calculator.GetTotal(combination, dices);
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Twos_with_five_2_should_return_10()
         {
             // Arrange
             var calculator = new Calculator();
-            _dices = new List<int> { 1, 1, 1, 1, 1 };
+            _dices = new List<int> { 2, 2, 2, 2, 2 };
 
             // Act
-            var actual = calculator.GetTotal(1, _dices);
+            var actual = calculator.GetTotal(2, _dices);
 
             // Assert
-            Assert.Equal(5, actual);
+            Assert.Equal(10, actual);
         }
 
         [Fact]
@@ -75,21 +90,7 @@ namespace Tests
 
             // Assert
             Assert.Throws<HasNotFiveDicesException>(() => calculator.GetTotal(1, _dices));
-        }
-
-        [Fact]
-        public void Twos_with_five_2_should_return_10()
-        {
-            // Arrange
-            var calculator = new Calculator();
-            _dices = new List<int> { 2, 2, 2, 2, 2 };
-
-            // Act
-            var actual = calculator.GetTotal(2, _dices);
-
-            // Assert
-            Assert.Equal(10, actual);
-        }
+        } 
 
         [Fact]
         public void Twos_with_zeros_2_should_return_0()
@@ -118,6 +119,5 @@ namespace Tests
             // Assert
             Assert.Equal(6, actual);
         }
-
     }
 }

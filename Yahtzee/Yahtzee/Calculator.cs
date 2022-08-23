@@ -9,6 +9,7 @@ namespace Tests
         {
             if (dices.Count != 5)
                 throw new HasNotFiveDicesException();
+
             return dices.Sum(x => x == combination ? combination : 0);
         }
     }
