@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Yahtzee
 {
     public class ScoreBoard
     {
-        private bool Aces;
-
-        private bool Twos;
+        private readonly bool[] _combinationAlreadySet = new bool[6]; // set by order
 
         public int CalculateTotalBeforeBonus()
         {
@@ -16,29 +13,12 @@ namespace Yahtzee
 
         public void AddCombination(int combination, List<int> dices)
         {
-            if (combination == 1)
+            if (_combinationAlreadySet[combination - 1])
             {
-                if (Aces)
-                {
-                    throw new SameCombinationTwiceException();
-                }
-                else
-                {
-                    Aces = true;
-                }
+                throw new SameCombinationTwiceException();
             }
-            else if ( combination == 2)
-            {
-                if (Twos)
-                {
-                    throw new SameCombinationTwiceException();
-                }
-                else
-                {
-                    Twos = true;
-                }
-            }
-            
+
+            _combinationAlreadySet[combination - 1] = true;
         }
     }
 }
