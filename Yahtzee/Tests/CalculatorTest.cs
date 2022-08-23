@@ -7,12 +7,9 @@ namespace Tests
     {
         private List<int> _dices;
 
-
-
         //5 dés + combinaison = total
-        [Fact]
         [Theory]
-        [InlineData(new List<int>() { 1,1,1,1,1 }, 5, 1)]
+        [MemberData(nameof(DataCombinationUpperLimitCase))]
         public void Aces_with_five_1_should_return_5(List<int> dices, int expected, int combination)
         {
             // Arrange
@@ -118,6 +115,18 @@ namespace Tests
 
             // Assert
             Assert.Equal(6, actual);
+        }
+
+        public static List<object[]> DataCombinationUpperLimitCase()
+        {
+            return new List<object[]> {
+                new object[] { new List<int> { 1, 1, 1, 1, 1 }, 5, 1 },
+                new object[] { new List<int> { 2, 2, 2, 2, 2 }, 10, 2 },
+                new object[] { new List<int> { 3, 3, 3, 3, 3 }, 15, 3 },
+                new object[] { new List<int> { 4, 4, 4, 4, 4 }, 20, 4 },
+                new object[] { new List<int> { 5, 5, 5, 5, 5 }, 25, 5 },
+                new object[] { new List<int> { 6, 6, 6, 6, 6 }, 30, 6 }
+            };
         }
     }
 }
