@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Xunit;
 using Yahtzee;
+using Yahtzee.Domain;
+using Yahtzee.Exceptions;
 
 namespace Tests
 {
@@ -25,7 +27,7 @@ namespace Tests
         {
             // Arrange
             var scoreBoard = new ScoreBoard();
-            scoreBoard.AddCombination(1, new List<int> { 2, 5, 3, 1, 5 });
+            scoreBoard.AddCombination(1, new List<int> { 2, 5, 3, 4, 5 });
             scoreBoard.AddCombination(2, new List<int> { 1, 5, 3, 1, 5 });
             scoreBoard.AddCombination(3, new List<int> { 1, 5, 5, 1, 2 });
             scoreBoard.AddCombination(4, new List<int> { 1, 5, 5, 1, 2 });

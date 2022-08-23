@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Yahtzee.Exceptions;
 
-namespace Yahtzee
+namespace Yahtzee.Domain
 {
     public class Calculator
     {

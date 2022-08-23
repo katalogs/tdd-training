@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Yahtzee
+namespace Yahtzee.Exceptions
 {
     public class SameCombinationTwiceException : Exception
     {

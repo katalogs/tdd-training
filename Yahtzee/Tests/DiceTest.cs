@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using Yahtzee;
+using Yahtzee.Domain;
 
 namespace Tests
 {

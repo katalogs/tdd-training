@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Xunit;
-using Yahtzee;
+using Yahtzee.Domain;
+using Yahtzee.Exceptions;
 
 namespace Tests
 {
