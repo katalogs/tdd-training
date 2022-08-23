@@ -5,8 +5,6 @@ namespace Tests
 {
     public class CalculatorTest
     {
-        private List<int> _dices;
-
         [Theory]
         [MemberData(nameof(DataCombinationUpperSectionSuccessCases))]
         public void GetTotalSuccess(List<int> dices, int expected, int combination)
@@ -44,7 +42,15 @@ namespace Tests
                 new object[] { new List<int> { 2, 2, 2, 3, 4 }, 6, 2 },
                 new object[] { new List<int> { 3, 4, 5, 3, 4 }, 0, 2 },
                 new object[] { new List<int> { 4, 3, 2, 2, 5 }, 0, 1 },
-                new object[] { new List<int> { 1, 1, 1, 2, 5 }, 3, 1 }
+                new object[] { new List<int> { 1, 1, 1, 2, 5 }, 3, 1 },
+                new object[] { new List<int> { 3, 1, 3, 3, 4 }, 9, 3 },
+                new object[] { new List<int> { 1, 4, 5, 2, 4 }, 0, 3 },
+                new object[] { new List<int> { 1, 4, 4, 4, 4 }, 16, 4 },
+                new object[] { new List<int> { 3, 5, 5, 3, 2 }, 0, 4 },
+                new object[] { new List<int> { 5, 5, 5, 3, 4 }, 15, 5 },
+                new object[] { new List<int> { 3, 4, 6, 3, 4 }, 0, 5 },
+                new object[] { new List<int> { 6, 1, 1, 1, 6 }, 12, 6 },
+                new object[] { new List<int> { 3, 4, 5, 3, 4 }, 0, 6 }
             };
         }
 
