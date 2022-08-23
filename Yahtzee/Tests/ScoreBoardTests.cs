@@ -38,16 +38,17 @@ namespace Tests
             // Assert
             Assert.Equal(0, actual);
         }
-
-        [Fact]
-        public void Add_same_combination_twice_should_throw_exception()
+        
+        [Theory]
+        [InlineData(2)]
+        public void Add_same_combination_twice_should_throw_exception(int combination)
         {
             // Arrange
             var scoreBoard = new ScoreBoard();
-            scoreBoard.AddCombination(1, new List<int> { 1, 5, 3, 1, 5 });
+            scoreBoard.AddCombination(combination, new List<int> { 1, 5, 3, 1, 5 });
 
             // Act
-            Assert.Throws<SameCombinationTwiceException>(() => scoreBoard.AddCombination(1, new List<int> { 4, 2, 3, 1, 3 }));
+            Assert.Throws<SameCombinationTwiceException>(() => scoreBoard.AddCombination(combination, new List<int> { 4, 2, 3, 1, 3 }));
         }
     }
 }
