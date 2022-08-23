@@ -40,6 +40,7 @@ namespace Tests
         }
         
         [Theory]
+        [InlineData(1)]
         [InlineData(2)]
         public void Add_same_combination_twice_should_throw_exception(int combination)
         {

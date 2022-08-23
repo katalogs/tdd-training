@@ -5,7 +5,10 @@ namespace Yahtzee
 {
     public class ScoreBoard
     {
-        private int _count = 0;
+        private bool Aces;
+
+        private bool Twos;
+
         public int CalculateTotalBeforeBonus()
         {
             return 0;
@@ -13,9 +16,29 @@ namespace Yahtzee
 
         public void AddCombination(int combination, List<int> dices)
         {
-            if (_count != 0 && combination == 1)
-                throw new SameCombinationTwiceException();
-            _count++;
+            if (combination == 1)
+            {
+                if (Aces)
+                {
+                    throw new SameCombinationTwiceException();
+                }
+                else
+                {
+                    Aces = true;
+                }
+            }
+            else if ( combination == 2)
+            {
+                if (Twos)
+                {
+                    throw new SameCombinationTwiceException();
+                }
+                else
+                {
+                    Twos = true;
+                }
+            }
+            
         }
     }
 }
