@@ -5,14 +5,15 @@ namespace Yahtzee
 {
     public class ScoreBoard
     {
+        
+
         public int CalculateTotalBeforeBonus()
         {
             return 0;
         }
 
-        public void AddCombination(int v, List<int> list)
+        public void AddCombination(int combination, List<int> dices)
         {
-            throw new NotImplementedException();
         }
     }
 }

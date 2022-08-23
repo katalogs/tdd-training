@@ -21,7 +21,7 @@ namespace Tests
         }
         
         [Fact]
-        public void all_combination_with_zero_should_return_score_0()
+        public void All_combination_with_zero_should_return_score_0()
         {
             // Arrange
             var scoreBoard = new ScoreBoard();
@@ -37,6 +37,17 @@ namespace Tests
 
             // Assert
             Assert.Equal(0, actual);
+        }
+
+        [Fact]
+        public void Add_same_combination_twice_should_throw_exception()
+        {
+            // Arrange
+            var scoreBoard = new ScoreBoard();
+            scoreBoard.AddCombination(1, new List<int> { 1, 5, 3, 1, 5 });
+
+            // Act
+            Assert.Throws<SameCombinationTwiceException>(() => scoreBoard.AddCombination(1, new List<int> { 4, 2, 3, 1, 3 }));
         }
     }
 }
