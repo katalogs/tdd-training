@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Xunit;
+using Yahtzee;
 
 namespace Tests
 {
@@ -9,22 +10,33 @@ namespace Tests
         [Fact]
         public void On_game_start_should_return_score_0()
         {
-            //1 - Score 0
-            //2 - Test de l'ensemble des combinaisons (vérifier feuille blanche)
-
             // Arrange
             var scoreBoard = new ScoreBoard();
 
-            var combination = 1;
-            var dices = new List<int>();
-
             // Act
-            var actual = scoreBoard.CalculateTotalBeforeBonus(combination, dices);
+            var actual = scoreBoard.CalculateTotalBeforeBonus();
 
             // Assert
             Assert.Equal(0, actual);
-
         }
+        
+        [Fact]
+        public void all_combination_with_zero_should_return_score_0()
+        {
+            // Arrange
+            var scoreBoard = new ScoreBoard();
+            scoreBoard.AddCombination(1, new List<int> { 2, 5, 3, 1, 5 });
+            scoreBoard.AddCombination(2, new List<int> { 1, 5, 3, 1, 5 });
+            scoreBoard.AddCombination(3, new List<int> { 1, 5, 5, 1, 2 });
+            scoreBoard.AddCombination(4, new List<int> { 1, 5, 5, 1, 2 });
+            scoreBoard.AddCombination(5, new List<int> { 1, 2, 3, 1, 2 });
+            scoreBoard.AddCombination(6, new List<int> { 1, 5, 5, 1, 2 });
 
+            // Act
+            var actual = scoreBoard.CalculateTotalBeforeBonus();
+
+            // Assert
+            Assert.Equal(0, actual);
+        }
     }
 }
