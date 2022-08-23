@@ -5,7 +5,7 @@ namespace Tests
 {
     public class Calculator
     {
-        public int GetTotal(int combination, List<int> dices)
+        public int CalculateScoreByCombination(int combination, List<int> dices)
         {
             if (dices.Count != 5)
                 throw new HasNotFiveDicesException();

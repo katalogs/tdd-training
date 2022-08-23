@@ -13,7 +13,7 @@ namespace Tests
             var calculator = new Calculator(); 
 
             // Act
-            var actual = calculator.GetTotal(combination, dices);
+            var actual = calculator.CalculateScoreByCombination(combination, dices);
 
             // Assert
             Assert.Equal(expected, actual);
@@ -27,7 +27,7 @@ namespace Tests
             var calculator = new Calculator();
 
             // Act & Assert
-            Assert.Throws<HasNotFiveDicesException>(() => calculator.GetTotal(1, dices));
+            Assert.Throws<HasNotFiveDicesException>(() => calculator.CalculateScoreByCombination(1, dices));
         } 
 
         public static List<object[]> DataCombinationUpperSectionSuccessCases()
