@@ -7,9 +7,8 @@ namespace Tests
     {
         private List<int> _dices;
 
-        //5 dés + combinaison = total
         [Theory]
-        [MemberData(nameof(DataCombinationUpperLimitCase))]
+        [MemberData(nameof(DataCombinationUpperSectionSuccessCases))]
         public void GetTotalSuccess(List<int> dices, int expected, int combination)
         {
             // Arrange
@@ -22,32 +21,18 @@ namespace Tests
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void Calculator_with_more_than_5_dices_should_throw_exception()
+        [Theory]
+        [MemberData(nameof(DataCombinationUpperSectionThrowException))]
+        public void Calculator_with_not_5_dices_should_throw_exception(List<int> dices)
         {
             // Arrange
             var calculator = new Calculator();
-            _dices = new List<int> { 4, 3, 2, 2, 5, 3, 5 };
 
-            // Act
-            var actual = Assert.Throws<HasNotFiveDicesException>(() => calculator.GetTotal(1, _dices));
+            // Act & Assert
+            Assert.Throws<HasNotFiveDicesException>(() => calculator.GetTotal(1, dices));
+        } 
 
-            // Assert
-            Assert.IsType<HasNotFiveDicesException>(actual);
-        }
-
-        [Fact]
-        public void Calculator_with_less_than_5_dices_should_throw_exception()
-        {
-            // Arrange
-            var calculator = new Calculator();
-            _dices = new List<int> { 4, 3, 2 };
-
-            // Assert
-            Assert.Throws<HasNotFiveDicesException>(() => calculator.GetTotal(1, _dices));
-        }
-
-        public static List<object[]> DataCombinationUpperLimitCase()
+        public static List<object[]> DataCombinationUpperSectionSuccessCases()
         {
             return new List<object[]> {
                 new object[] { new List<int> { 1, 1, 1, 1, 1 }, 5, 1 },
@@ -60,6 +45,14 @@ namespace Tests
                 new object[] { new List<int> { 3, 4, 5, 3, 4 }, 0, 2 },
                 new object[] { new List<int> { 4, 3, 2, 2, 5 }, 0, 1 },
                 new object[] { new List<int> { 1, 1, 1, 2, 5 }, 3, 1 }
+            };
+        }
+
+        public static List<object[]> DataCombinationUpperSectionThrowException()
+        {
+            return new List<object[]> {
+                new object[] { new List<int> { 1,2,5,4,6,8,5,4 }},
+                new object[] { new List<int> { 1,5,4 }}
             };
         }
     }
