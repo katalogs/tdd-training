@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Tests
+namespace Yahtzee
 {
     public class Calculator
     {

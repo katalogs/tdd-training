@@ -55,12 +55,7 @@ namespace Tests
             // Act
             Assert.Throws<SameCombinationTwiceException>(() => scoreBoard.AddCombination(combination, new List<int> { 4, 2, 3, 1, 3 }));
         }
-
-        //Aces 3
-        //Twos 8
-        //Fours 12
-        //Sixes 18
-        //Total 41  
+          
         [Fact]
         public void Combination_not_fully_set_should_return_score_41()
         {
